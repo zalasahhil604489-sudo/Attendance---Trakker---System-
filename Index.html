@@ -1,0 +1,1685 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Student Attendance System</title>
+
+<style>
+
+* {
+
+    box-sizing: border-box;
+
+}
+
+:root {
+
+    --teal: #0d625b;
+
+    --teal-dark: #084e49;
+
+    --bg: #eaf0f2;
+
+    --surface: #ffffff;
+
+    --text: #145c56;
+
+    --muted: #75868a;
+
+    --pale: #e2f3f0;
+
+    --blue: #e2f1ff;
+
+    --border: #e5edef;
+
+}
+
+body {
+
+    margin: 0;
+
+    padding: 18px;
+
+    background: var(--bg);
+
+    font-family: Arial, sans-serif;
+
+    color: var(--text);
+
+}
+
+.phone {
+
+    max-width: 390px;
+
+    min-height: 750px;
+
+    margin: auto;
+
+    background: #f7f9fa;
+
+    border-radius: 20px;
+
+    overflow: hidden;
+
+    box-shadow: 0 4px 20px #00000012;
+
+    position: relative;
+
+    padding-bottom: 65px;
+
+}
+
+header {
+
+    background: var(--teal);
+
+    color: white;
+
+    padding: 18px 20px;
+
+    border-radius: 0 0 15px 15px;
+
+}
+
+header small {
+
+    font-size: 9px;
+
+    letter-spacing: .8px;
+
+}
+
+header h1 {
+
+    font-size: 19px;
+
+    margin: 7px 0 0;
+
+}
+
+main {
+
+    padding: 20px 16px;
+
+}
+
+h2 {
+
+    font-size: 17px;
+
+    margin: 8px 0;
+
+}
+
+h3 {
+
+    font-size: 13px;
+
+    margin: 0 0 10px;
+
+}
+
+p {
+
+    font-size: 11px;
+
+    color: var(--muted);
+
+    line-height: 1.6;
+
+}
+
+.logo {
+
+    width: 46px;
+
+    height: 46px;
+
+    background: var(--pale);
+
+    border-radius: 50%;
+
+    margin: 0 auto 20px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    font-size: 25px;
+
+}
+
+.center {
+
+    text-align: center;
+
+}
+
+.welcome-content {
+
+    padding-top: 5px;
+
+}
+
+.notice {
+
+    background: var(--pale);
+
+    padding: 14px;
+
+    border-radius: 10px;
+
+    margin: 20px 0;
+
+    font-size: 12px;
+
+}
+
+.card {
+
+    background: white;
+
+    padding: 13px;
+
+    border-radius: 11px;
+
+    border: 1px solid var(--border);
+
+    margin: 12px 0;
+
+}
+
+.btn {
+
+    width: 100%;
+
+    display: block;
+
+    padding: 12px 10px;
+
+    margin: 8px 0;
+
+    background: var(--teal);
+
+    color: white;
+
+    border: 0;
+
+    border-radius: 7px;
+
+    font-size: 10px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+}
+
+.btn:hover {
+
+    background: var(--teal-dark);
+
+}
+
+.btn.light {
+
+    background: var(--pale);
+
+    color: var(--teal);
+
+}
+
+.btn.danger {
+
+    background: #b93636;
+
+}
+
+.btn.small {
+
+    padding: 9px 6px;
+
+    font-size: 9px;
+
+}
+
+.hidden {
+
+    display: none !important;
+
+}
+
+.form {
+
+    text-align: left;
+
+}
+
+.form label {
+
+    display: block;
+
+    font-size: 11px;
+
+    font-weight: bold;
+
+    margin: 12px 0 6px;
+
+}
+
+input, select, textarea {
+
+    width: 100%;
+
+    padding: 11px;
+
+    border: 1px solid var(--border);
+
+    border-radius: 7px;
+
+    background: white;
+
+    font: inherit;
+
+    font-size: 11px;
+
+    color: var(--text);
+
+}
+
+textarea {
+
+    min-height: 75px;
+
+    resize: vertical;
+
+}
+
+.link {
+
+    color: var(--teal);
+
+    cursor: pointer;
+
+    font-size: 11px;
+
+    text-decoration: none;
+
+}
+
+.grid {
+
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    gap: 9px;
+
+}
+
+.stat {
+
+    padding: 13px;
+
+    border-radius: 10px;
+
+    background: var(--pale);
+
+}
+
+.stat.blue {
+
+    background: var(--blue);
+
+}
+
+.stat p {
+
+    margin: 0 0 5px;
+
+}
+
+.stat strong {
+
+    font-size: 21px;
+
+}
+
+.row {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    gap: 8px;
+
+}
+
+.badge {
+
+    padding: 5px 8px;
+
+    border-radius: 20px;
+
+    font-size: 9px;
+
+    background: #d5f8e9;
+
+    color: #087b51;
+
+}
+
+.pending {
+
+    background: #fff0c9;
+
+    color: #986900;
+
+}
+
+.rejected {
+
+    background: #ffe1e1;
+
+    color: #b32626;
+
+}
+
+.success-icon {
+
+    width: 65px;
+
+    height: 65px;
+
+    margin: 30px auto 18px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    background: #d5f8e9;
+
+    color: #07996c;
+
+    border-radius: 50%;
+
+    font-size: 38px;
+
+}
+
+.bottom-nav {
+
+    position: absolute;
+
+    bottom: 0;
+
+    left: 0;
+
+    right: 0;
+
+    display: grid;
+
+    grid-template-columns: repeat(4, 1fr);
+
+    background: white;
+
+    border-top: 1px solid var(--border);
+
+    padding: 10px 3px;
+
+}
+
+.bottom-nav button {
+
+    border: 0;
+
+    background: white;
+
+    color: var(--muted);
+
+    font-size: 9px;
+
+    cursor: pointer;
+
+    padding: 7px 1px;
+
+}
+
+.bottom-nav button.active {
+
+    color: var(--teal);
+
+    font-weight: bold;
+
+}
+
+.document {
+
+    display: flex;
+
+    gap: 10px;
+
+    align-items: center;
+
+    padding: 12px 0;
+
+    border-bottom: 1px solid var(--border);
+
+}
+
+.document:last-child {
+
+    border-bottom: 0;
+
+}
+
+.document-icon {
+
+    background: var(--pale);
+
+    border-radius: 6px;
+
+    padding: 10px;
+
+}
+
+@media (max-width: 420px) {
+
+    body {
+
+        padding: 0;
+
+    }
+
+    .phone {
+
+        border-radius: 0;
+
+        min-height: 100vh;
+
+        box-shadow: none;
+
+    }
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="phone">
+
+<header>
+
+    <small>STUDENT ATTENDANCE SYSTEM</small>
+
+    <h1 id="pageTitle">Main Page</h1>
+
+</header>
+
+<main>
+
+<!-- 01 MAIN PAGE -->
+
+<section id="welcome" class="welcome-content center">
+
+    <div class="logo">◆</div>
+
+    <h2>Welcome to Student Attendance</h2>
+
+    <p>Manage attendance and leave requests.</p>
+
+    <div class="notice" style="text-align:left">
+
+        <strong>Simple. Secure. Organized.</strong>
+
+        <p>Your student attendance is one tap away.</p>
+
+    </div>
+
+    <button class="btn" onclick="showPage('login')">LOGIN</button>
+
+    <button class="btn" onclick="showPage('register')">
+
+        REGISTER AS STUDENT
+
+    </button>
+
+    <div style="margin-top:25px">
+
+        <strong style="font-size:11px">Admin access</strong>
+
+        <p><a class="link" onclick="showPage('adminLogin')">
+
+            Sign in as admin
+
+        </a></p>
+
+        <a class="link" onclick="showPage('admin')">
+
+            Register as admin
+
+        </a>
+
+    </div>
+
+</section>
+
+<!-- 02 LOGIN -->
+
+<section id="login" class="hidden form">
+
+    <h2>Welcome back</h2>
+
+    <p>Enter your account details.</p>
+
+    <form onsubmit="loginDemo(event)">
+
+        <label>Username or email</label>
+
+        <input required placeholder="Enter username or email">
+
+        <label>Password</label>
+
+        <input required type="password" placeholder="Enter password">
+
+        <p class="center">
+
+            <a class="link" onclick="showPage('forgot')">
+
+                Forgot password?
+
+            </a>
+
+        </p>
+
+        <button class="btn">LOGIN</button>
+
+    </form>
+
+    <p class="center">
+
+        Don't have an account?
+
+        <a class="link" onclick="showPage('register')">Register</a>
+
+    </p>
+
+    <button class="btn light" onclick="showPage('welcome')">BACK</button>
+
+</section>
+
+<!-- 03 ADMIN REGISTER -->
+
+<section id="admin" class="hidden form">
+
+    <h2>Create your account</h2>
+
+    <form onsubmit="registerDemo(event)">
+
+        <label>Full name</label>
+
+        <input required placeholder="Enter full name">
+
+        <label>Email address</label>
+
+        <input required type="email" placeholder="Enter email">
+
+        <label>Username</label>
+
+        <input required placeholder="Enter username">
+
+        <label>School / Admin ID</label>
+
+        <input required placeholder="Enter admin ID">
+
+        <label>Password</label>
+
+        <input required type="password" placeholder="Enter password">
+
+        <button class="btn">CREATE ACCOUNT</button>
+
+    </form>
+
+    <button class="btn light" onclick="showPage('welcome')">BACK</button>
+
+</section>
+
+<!-- 04 STUDENT REGISTER -->
+
+<section id="register" class="hidden form">
+
+    <h2>Create your account</h2>
+
+    <form onsubmit="registerDemo(event)">
+
+        <label>Full name</label>
+
+        <input required placeholder="Enter full name">
+
+        <label>Email address</label>
+
+        <input required type="email" placeholder="Enter email">
+
+        <label>Username</label>
+
+        <input required placeholder="Enter username">
+
+        <label>School / Student ID</label>
+
+        <input required placeholder="Enter student ID">
+
+        <label>Password</label>
+
+        <input required type="password" placeholder="Enter password">
+
+        <button class="btn">CREATE ACCOUNT</button>
+
+    </form>
+
+    <button class="btn light" onclick="showPage('welcome')">BACK</button>
+
+</section>
+
+<!-- ADMIN LOGIN -->
+
+<section id="adminLogin" class="hidden form">
+
+    <h2>Admin Login</h2>
+
+    <form onsubmit="adminLoginDemo(event)">
+
+        <label>Admin username</label>
+
+        <input required placeholder="Enter username">
+
+        <label>Password</label>
+
+        <input required type="password" placeholder="Enter password">
+
+        <button class="btn">LOGIN</button>
+
+    </form>
+
+    <button class="btn light" onclick="showPage('welcome')">BACK</button>
+
+</section>
+
+<!-- 05 FORGOT PASSWORD -->
+
+<section id="forgot" class="hidden form">
+
+    <div class="logo">◆</div>
+
+    <h2>Reset your password</h2>
+
+    <p>Enter your email to request a password reset.</p>
+
+    <form onsubmit="forgotDemo(event)">
+
+        <label>Email address</label>
+
+        <input required type="email" placeholder="name@example.com">
+
+        <button class="btn">SEND RESET LINK</button>
+
+    </form>
+
+    <button class="btn light" onclick="showPage('login')">
+
+        BACK TO LOGIN
+
+    </button>
+
+</section>
+
+<!-- 06 GENERAL SUCCESS -->
+
+<section id="success" class="hidden center">
+
+    <div class="success-icon">✓</div>
+
+    <h2 id="successTitle">Completed successfully!</h2>
+
+    <p id="successText">Your request has been received.</p>
+
+    <button class="btn" onclick="showPage('login')">CONTINUE</button>
+
+</section>
+
+<!-- 07 ATTENDANCE SUCCESS -->
+
+<section id="attendanceSuccess" class="hidden center">
+
+    <div class="success-icon">✓</div>
+
+    <h2>Attendance Success</h2>
+
+    <p>Your attendance has been marked in this demo.</p>
+
+    <button class="btn" onclick="showPage('dashboard')">CONTINUE</button>
+
+</section>
+
+<!-- 08 STUDENT DASHBOARD -->
+
+<section id="dashboard" class="hidden">
+
+    <h2>Good morning, Student</h2>
+
+    <p>Here is your attendance overview.</p>
+
+    <div class="grid">
+
+        <div class="stat">
+
+            <p>Attendance</p>
+
+            <strong id="attendancePercent">92%</strong>
+
+        </div>
+
+        <div class="stat blue">
+
+            <p>Present</p>
+
+            <strong id="presentCount">23</strong>
+
+        </div>
+
+    </div>
+
+    <div class="card">
+
+        <h3>Quick Actions</h3>
+
+        <button class="btn" onclick="showPage('markAttendance')">
+
+            Mark Attendance
+
+        </button>
+
+        <button class="btn" onclick="showPage('leaveRequest')">
+
+            Apply for Leave
+
+        </button>
+
+        <button class="btn" onclick="showPage('report')">
+
+            View Attendance Report
+
+        </button>
+
+    </div>
+
+    <div class="card">
+
+        <h3>Recent Activity</h3>
+
+        <p id="recentAttendance">Attendance records will appear here.</p>
+
+        <p id="recentLeave">Leave requests will appear here.</p>
+
+    </div>
+
+</section>
+
+<!-- 09 LEAVE APPROVAL / ADMIN VIEW -->
+
+<section id="leaveApprove" class="hidden">
+
+    <h2>Leave Approval — Approve</h2>
+
+    <p>Leave request details</p>
+
+    <div class="card">
+
+        <strong>Student: Alex Morgan</strong>
+
+        <p>Leave type: Sick Leave</p>
+
+        <p>Dates: Oct 16 – Oct 17</p>
+
+        <p>Reason: Medical appointment</p>
+
+        <p>Status: <span class="badge pending" id="adminLeaveStatus">
+
+            Pending
+
+        </span></p>
+
+    </div>
+
+    <button class="btn" onclick="updateLeave('Approved')">
+
+        APPROVE REQUEST
+
+    </button>
+
+    <button class="btn danger" onclick="updateLeave('Rejected')">
+
+        REJECT REQUEST
+
+    </button>
+
+    <button class="btn light" onclick="showPage('adminPanel')">BACK</button>
+
+</section>
+
+<!-- 10 LEAVE APPROVAL ASK -->
+
+<section id="leaveAsk" class="hidden form">
+
+    <h2>Leave Approval — Ask</h2>
+
+    <div class="card">
+
+        <strong>Leave request details</strong>
+
+        <p id="askDetails">Student leave request.</p>
+
+    </div>
+
+    <label>Ask for more information</label>
+
+    <textarea id="askMessage" placeholder="Write a message to the student"></textarea>
+
+    <button class="btn" onclick="sendAsk()">SEND MESSAGE</button>
+
+    <button class="btn light" onclick="showPage('adminPanel')">BACK</button>
+
+</section>
+
+<!-- 11 ADMIN PANEL -->
+
+<section id="adminPanel" class="hidden">
+
+    <h2>School overview</h2>
+
+    <div class="card">
+
+        <p>Students</p><h2>248</h2>
+
+    </div>
+
+    <div class="card">
+
+        <p>Present today</p><h2>221</h2>
+
+    </div>
+
+    <div class="card">
+
+        <p>Pending leaves</p><h2 id="pendingLeaves">7</h2>
+
+    </div>
+
+    <div class="card">
+
+        <h3>Management</h3>
+
+        <button class="btn" onclick="showPage('attendanceTime')">
+
+            Attendance Schedule
+
+        </button>
+
+        <button class="btn" onclick="showPage('leaveApprove')">
+
+            Manage Leave Requests
+
+        </button>
+
+        <button class="btn" onclick="showPage('report')">
+
+            View Reports
+
+        </button>
+
+        <button class="btn" onclick="showPage('messages')">Messages</button>
+
+    </div>
+
+</section>
+
+<!-- 12 ATTENDANCE TIME -->
+
+<section id="attendanceTime" class="hidden form">
+
+    <h2>Attendance schedule</h2>
+
+    <form onsubmit="saveSchedule(event)">
+
+        <label>School hours</label>
+
+        <input type="time" value="08:00" required id="schoolStart">
+
+        <label>School closing time</label>
+
+        <input type="time" value="14:00" required id="schoolEnd">
+
+        <label>Attendance opening time</label>
+
+        <input type="time" value="08:00" required id="attendanceStart">
+
+        <label>Attendance closing time</label>
+
+        <input type="time" value="09:00" required id="attendanceEnd">
+
+        <button class="btn">SAVE SCHEDULE</button>
+
+    </form>
+
+    <button class="btn light" onclick="showPage('adminPanel')">BACK</button>
+
+</section>
+
+<!-- 13 MARK ATTENDANCE -->
+
+<section id="markAttendance" class="hidden">
+
+    <h2>Mark your attendance</h2>
+
+    <div class="notice">
+
+        <strong>Today</strong>
+
+        <p id="todayDate"></p>
+
+    </div>
+
+    <div class="card">
+
+        <p>Current time</p>
+
+        <strong id="currentTime">Ready to mark attendance</strong>
+
+    </div>
+
+    <button class="btn" onclick="markPresent()">MARK PRESENT</button>
+
+    <button class="btn light" onclick="showPage('dashboard')">BACK</button>
+
+</section>
+
+<!-- 14 STUDENT MESSAGES -->
+
+<section id="messages" class="hidden">
+
+    <h2>Inbox</h2>
+
+    <div class="card">
+
+        <strong>School Admin</strong>
+
+        <p>Please confirm your class details.</p>
+
+    </div>
+
+    <div class="card">
+
+        <strong>Class Teacher</strong>
+
+        <p>Attendance report is available.</p>
+
+    </div>
+
+    <div class="card">
+
+        <strong>School Admin</strong>
+
+        <p id="messageFromAdmin">Your messages will appear here.</p>
+
+    </div>
+
+</section>
+
+<!-- 15 STUDENT REPORT -->
+
+<section id="report" class="hidden">
+
+    <h2>Attendance report</h2>
+
+    <div class="card">
+
+        <p>Overall attendance</p>
+
+        <h2 id="reportPercent">92%</h2>
+
+    </div>
+
+    <div class="card">
+
+        <h3>Monthly summary</h3>
+
+        <p>Present days: <strong id="reportPresent">23</strong></p>
+
+        <p>Absent days: 2</p>
+
+        <p>Late days: 1</p>
+
+    </div>
+
+    <button class="btn" onclick="downloadReport()">DOWNLOAD REPORT</button>
+
+</section>
+
+<!-- 16 STUDENT DOCUMENTS -->
+
+<section id="documents" class="hidden">
+
+    <h2>My documents</h2>
+
+    <div class="card">
+
+        <div class="document">
+
+            <span class="document-icon">▤</span>
+
+            <div><strong>Student ID Card</strong><p>Student identification</p></div>
+
+        </div>
+
+        <div class="document">
+
+            <span class="document-icon">▤</span>
+
+            <div><strong>Attendance Certificate</strong><p>Attendance record</p></div>
+
+        </div>
+
+        <div class="document">
+
+            <span class="document-icon">▤</span>
+
+            <div><strong>Term Report</strong><p>Term summary</p></div>
+
+        </div>
+
+    </div>
+
+    <button class="btn" onclick="downloadReport()">DOWNLOAD ATTENDANCE REPORT</button>
+
+</section>
+
+<!-- 17 LEAVE REQUEST -->
+
+<section id="leaveRequest" class="hidden form">
+
+    <h2>Leave request details</h2>
+
+    <form onsubmit="submitLeave(event)">
+
+        <label>Leave type</label>
+
+        <select id="leaveType" required>
+
+            <option value="">Select leave type</option>
+
+            <option>Sick Leave</option>
+
+            <option>Casual Leave</option>
+
+        </select>
+
+        <label>Start date</label>
+
+        <input id="leaveStart" type="date" required>
+
+        <label>End date</label>
+
+        <input id="leaveEnd" type="date" required>
+
+        <label>Reason</label>
+
+        <textarea id="leaveReason" required placeholder="Explain your reason"></textarea>
+
+        <button class="btn">SUBMIT REQUEST</button>
+
+    </form>
+
+    <button class="btn light" onclick="showPage('dashboard')">BACK</button>
+
+</section>
+
+<!-- 18 LEAVE SUCCESS -->
+
+<section id="leaveSuccess" class="hidden center">
+
+    <div class="success-icon">✓</div>
+
+    <h2>Leave Request Submitted</h2>
+
+    <p>Your request has been saved in this demo.</p>
+
+    <button class="btn" onclick="showPage('leaveStatus')">VIEW STATUS</button>
+
+</section>
+
+<!-- 19 LEAVE STATUS -->
+
+<section id="leaveStatus" class="hidden">
+
+    <h2>Student Leave Status</h2>
+
+    <div class="card">
+
+        <div class="row">
+
+            <strong id="statusLeaveType">Sick Leave</strong>
+
+            <span class="badge pending" id="leaveBadge">Pending</span>
+
+        </div>
+
+        <p id="statusLeaveDates">Your requested dates will appear here.</p>
+
+        <p id="statusLeaveReason"></p>
+
+    </div>
+
+    <button class="btn" onclick="showPage('dashboard')">BACK TO DASHBOARD</button>
+
+</section>
+
+<!-- 20 LEAVE REJECTED -->
+
+<section id="leaveRejected" class="hidden center">
+
+    <div class="success-icon" style="background:#ffe1e1;color:#c62828">×</div>
+
+    <h2>Leave Status</h2>
+
+    <p style="color:#c62828">Your leave request was rejected.</p>
+
+    <div class="card" id="rejectedDetails"></div>
+
+    <button class="btn" onclick="showPage('dashboard')">BACK TO DASHBOARD</button>
+
+</section>
+
+<!-- 21 LEAVE APPROVED -->
+
+<section id="leaveApproved" class="hidden center">
+
+    <div class="success-icon">✓</div>
+
+    <h2>Leave Status</h2>
+
+    <p>Your leave request was approved.</p>
+
+    <div class="card" id="approvedDetails"></div>
+
+    <button class="btn" onclick="showPage('dashboard')">BACK TO DASHBOARD</button>
+
+</section>
+
+<!-- PROFILE -->
+
+<section id="profile" class="hidden">
+
+    <h2>Student Profile</h2>
+
+    <div class="card">
+
+        <div class="logo">♙</div>
+
+        <h3 class="center" id="profileName">Student</h3>
+
+        <p class="center">Student account</p>
+
+        <p>Attendance System</p>
+
+    </div>
+
+    <button class="btn" onclick="showPage('documents')">My Documents</button>
+
+    <button class="btn" onclick="showPage('report')">My Reports</button>
+
+    <button class="btn danger" onclick="showPage('welcome')">LOG OUT</button>
+
+</section>
+
+</main>
+
+<!-- Bottom navigation -->
+
+<nav id="bottomNav" class="bottom-nav hidden">
+
+    <button onclick="showPage('dashboard')" data-nav="dashboard">⌂<br>Home</button>
+
+    <button onclick="showPage('markAttendance')" data-nav="markAttendance">✓<br>Attendance</button>
+
+    <button onclick="showPage('messages')" data-nav="messages">✉<br>Messages</button>
+
+    <button onclick="showPage('profile')" data-nav="profile">♙<br>Profile</button>
+
+</nav>
+
+</div>
+
+<script>
+
+let presentCount = 23;
+
+let attendanceMarked = false;
+
+let leaveData = {
+
+    type: "Sick Leave",
+
+    start: "",
+
+    end: "",
+
+    reason: "",
+
+    status: "Pending"
+
+};
+
+const pageTitles = {
+
+    welcome: "Main Page",
+
+    login: "Login",
+
+    admin: "Admin Register",
+
+    adminLogin: "Admin Login",
+
+    register: "Student Register",
+
+    forgot: "Forgot Password",
+
+    success: "Success",
+
+    dashboard: "Student Dashboard",
+
+    attendanceSuccess: "Attendance Success",
+
+    leaveApprove: "Leave Approval — Approve",
+
+    leaveAsk: "Leave Approval — Ask",
+
+    adminPanel: "Admin Panel",
+
+    attendanceTime: "Attendance Time",
+
+    markAttendance: "Student Mark Attendance",
+
+    messages: "Student Messages",
+
+    report: "Student Report",
+
+    documents: "Student Documents",
+
+    leaveRequest: "Leave Request",
+
+    leaveSuccess: "Leave Success",
+
+    leaveStatus: "Student Leave Status",
+
+    leaveRejected: "Leave Status — Rejected",
+
+    leaveApproved: "Leave Status — Approved",
+
+    profile: "Student Profile"
+
+};
+
+function showPage(page) {
+
+    const target = document.getElementById(page);
+
+    if (!target) {
+
+        alert("This screen is not available.");
+
+        return;
+
+    }
+
+    document.querySelectorAll("main section").forEach(section => {
+
+        section.classList.add("hidden");
+
+    });
+
+    target.classList.remove("hidden");
+
+    document.getElementById("pageTitle").textContent =
+
+        pageTitles[page] || "Student Attendance System";
+
+    const nav = document.getElementById("bottomNav");
+
+    const navPages = [
+
+        "dashboard", "markAttendance", "messages", "report",
+
+        "documents", "profile", "leaveStatus"
+
+    ];
+
+    nav.classList.toggle("hidden", !navPages.includes(page));
+
+    document.querySelectorAll("[data-nav]").forEach(button => {
+
+        button.classList.toggle("active", button.dataset.nav === page);
+
+    });
+
+    window.scrollTo(0, 0);
+
+}
+
+function loginDemo(event) {
+
+    event.preventDefault();
+
+    showPage("dashboard");
+
+}
+
+function adminLoginDemo(event) {
+
+    event.preventDefault();
+
+    showPage("adminPanel");
+
+}
+
+function registerDemo(event) {
+
+    event.preventDefault();
+
+    document.getElementById("successTitle").textContent =
+
+        "Account Form Completed!";
+
+    document.getElementById("successText").textContent =
+
+        "This is a demo. Your account has not been saved to a database.";
+
+    showPage("success");
+
+}
+
+function forgotDemo(event) {
+
+    event.preventDefault();
+
+    document.getElementById("successTitle").textContent =
+
+        "Request Completed!";
+
+    document.getElementById("successText").textContent =
+
+        "Password reset email is not configured in this demo.";
+
+    showPage("success");
+
+}
+
+function markPresent() {
+
+    if (attendanceMarked) {
+
+        alert("Attendance has already been marked in this session.");
+
+        return;
+
+    }
+
+    attendanceMarked = true;
+
+    presentCount++;
+
+    document.getElementById("presentCount").textContent = presentCount;
+
+    document.getElementById("reportPresent").textContent = presentCount;
+
+    document.getElementById("recentAttendance").textContent =
+
+        "Attendance marked · Today";
+
+    document.getElementById("currentTime").textContent =
+
+        new Date().toLocaleTimeString([], {
+
+            hour: "2-digit",
+
+            minute: "2-digit"
+
+        });
+
+    showPage("attendanceSuccess");
+
+}
+
+function submitLeave(event) {
+
+    event.preventDefault();
+
+    const start = document.getElementById("leaveStart").value;
+
+    const end = document.getElementById("leaveEnd").value;
+
+    if (end < start) {
+
+        alert("End date cannot be earlier than start date.");
+
+        return;
+
+    }
+
+    leaveData.type = document.getElementById("leaveType").value;
+
+    leaveData.start = start;
+
+    leaveData.end = end;
+
+    leaveData.reason = document.getElementById("leaveReason").value;
+
+    leaveData.status = "Pending";
+
+    updateLeaveDisplay();
+
+    document.getElementById("recentLeave").textContent =
+
+        "Leave request · Pending";
+
+    showPage("leaveSuccess");
+
+}
+
+function updateLeaveDisplay() {
+
+    document.getElementById("statusLeaveType").textContent = leaveData.type;
+
+    document.getElementById("statusLeaveDates").textContent =
+
+        leaveData.start + " to " + leaveData.end;
+
+    document.getElementById("statusLeaveReason").textContent =
+
+        "Reason: " + leaveData.reason;
+
+    const badge = document.getElementById("leaveBadge");
+
+    badge.textContent = leaveData.status;
+
+    badge.className = "badge";
+
+    if (leaveData.status === "Pending") badge.classList.add("pending");
+
+    if (leaveData.status === "Rejected") badge.classList.add("rejected");
+
+    const details = "<strong>" + escapeHTML(leaveData.type) +
+
+        "</strong><p>" + escapeHTML(leaveData.start) + " to " +
+
+        escapeHTML(leaveData.end) + "</p><p>" +
+
+        escapeHTML(leaveData.reason) + "</p>";
+
+    document.getElementById("approvedDetails").innerHTML = details;
+
+    document.getElementById("rejectedDetails").innerHTML = details;
+
+}
+
+function updateLeave(status) {
+
+    leaveData.status = status;
+
+    updateLeaveDisplay();
+
+    if (status === "Approved") {
+
+        document.getElementById("adminLeaveStatus").textContent = "Approved";
+
+        showPage("leaveApproved");
+
+    } else {
+
+        document.getElementById("adminLeaveStatus").textContent = "Rejected";
+
+        showPage("leaveRejected");
+
+    }
+
+}
+
+function sendAsk() {
+
+    const message = document.getElementById("askMessage").value.trim();
+
+    if (!message) {
+
+        alert("Please write a message first.");
+
+        return;
+
+    }
+
+    document.getElementById("messageFromAdmin").textContent = message;
+
+    alert("Demo message added to the Messages screen.");
+
+    showPage("messages");
+
+}
+
+function saveSchedule(event) {
+
+    event.preventDefault();
+
+    const start = document.getElementById("schoolStart").value;
+
+    const end = document.getElementById("schoolEnd").value;
+
+    if (end <= start) {
+
+        alert("Closing time must be later than starting time.");
+
+        return;
+
+    }
+
+    alert("Schedule updated in this demo.");
+
+    showPage("adminPanel");
+
+}
+
+function downloadReport() {
+
+    const content =
+
+        "STUDENT ATTENDANCE REPORT\n" +
+
+        "Attendance: " + document.getElementById("attendancePercent").textContent + "\n" +
+
+        "Present days: " + presentCount + "\n" +
+
+        "Leave status: " + leaveData.status + "\n";
+
+    const file = new Blob([content], {type: "text/plain"});
+
+    const url = URL.createObjectURL(file);
+
+    const link = document.createElement("a");
+
+    link.href = url;
+
+    link.download = "attendance-report.txt";
+
+    link.click();
+
+    URL.revokeObjectURL(url);
+
+}
+
+function escapeHTML(value) {
+
+    return String(value).replace(/[&<>"']/g, char => ({
+
+        "&": "&amp;",
+
+        "<": "&lt;",
+
+        ">": "&gt;",
+
+        '"': "&quot;",
+
+        "'": "&#39;"
+
+    })[char]);
+
+}
+
+function updateClock() {
+
+    document.getElementById("todayDate").textContent =
+
+        new Date().toLocaleDateString(undefined, {
+
+            weekday: "long",
+
+            year: "numeric",
+
+            month: "long",
+
+            day: "numeric"
+
+        });
+
+}
+
+updateClock();
+
+showPage("welcome");
+
+</script>
+
+</body>
+
+</html>

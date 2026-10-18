@@ -1,0 +1,971 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Student Messages | Student Attendance System</title>
+
+<style>
+
+* {
+
+    box-sizing: border-box;
+
+}
+
+:root {
+
+    --teal: #0d625b;
+
+    --dark: #084e49;
+
+    --bg: #eaf0f2;
+
+    --text: #354956;
+
+    --muted: #75868a;
+
+}
+
+body {
+
+    margin: 0;
+
+    font-family: Arial, sans-serif;
+
+    background: var(--bg);
+
+    color: var(--text);
+
+}
+
+.app {
+
+    width: 100%;
+
+    max-width: 430px;
+
+    min-height: 100vh;
+
+    margin: auto;
+
+    background: #f8fafb;
+
+    padding-bottom: 75px;
+
+    position: relative;
+
+}
+
+header {
+
+    background: var(--dark);
+
+    color: white;
+
+    padding: 20px 18px;
+
+    border-radius: 0 0 16px 16px;
+
+}
+
+.brand {
+
+    font-size: 10px;
+
+    font-weight: bold;
+
+    letter-spacing: .5px;
+
+    margin-bottom: 8px;
+
+}
+
+header h1 {
+
+    font-size: 22px;
+
+    margin: 0;
+
+}
+
+main {
+
+    padding: 20px 14px;
+
+}
+
+.page-title {
+
+    font-size: 19px;
+
+    margin: 8px 0 18px;
+
+}
+
+.inbox {
+
+    background: white;
+
+    border: 1px solid #e8edef;
+
+    border-radius: 13px;
+
+    padding: 12px;
+
+}
+
+.inbox h2 {
+
+    font-size: 16px;
+
+    margin: 5px 4px 13px;
+
+}
+
+.search {
+
+    width: 100%;
+
+    padding: 11px;
+
+    border: 1px solid #d5e0e3;
+
+    border-radius: 8px;
+
+    font-size: 13px;
+
+    margin-bottom: 12px;
+
+}
+
+.conversation {
+
+    width: 100%;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 11px;
+
+    text-align: left;
+
+    padding: 13px 10px;
+
+    margin-bottom: 8px;
+
+    border: 1px solid #e7edef;
+
+    border-radius: 9px;
+
+    background: white;
+
+    cursor: pointer;
+
+    color: var(--text);
+
+}
+
+.conversation:hover,
+
+.conversation.active {
+
+    background: #e6f4f1;
+
+    border-color: #b9dcd5;
+
+}
+
+.avatar {
+
+    flex-shrink: 0;
+
+    width: 37px;
+
+    height: 37px;
+
+    display: grid;
+
+    place-items: center;
+
+    border-radius: 50%;
+
+    background: #dcefeb;
+
+    color: var(--teal);
+
+    font-weight: bold;
+
+    font-size: 13px;
+
+}
+
+.conversation-info {
+
+    flex: 1;
+
+    min-width: 0;
+
+}
+
+.conversation-info strong {
+
+    display: block;
+
+    font-size: 13px;
+
+    margin-bottom: 5px;
+
+}
+
+.conversation-info small {
+
+    display: block;
+
+    font-size: 11px;
+
+    color: var(--muted);
+
+    overflow: hidden;
+
+    white-space: nowrap;
+
+    text-overflow: ellipsis;
+
+}
+
+.chevron {
+
+    font-size: 19px;
+
+    color: #7a9895;
+
+}
+
+.empty-search {
+
+    font-size: 13px;
+
+    color: var(--muted);
+
+    padding: 15px 5px;
+
+}
+
+.chat {
+
+    margin-top: 15px;
+
+    background: white;
+
+    border: 1px solid #e8edef;
+
+    border-radius: 13px;
+
+    overflow: hidden;
+
+}
+
+.chat-header {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 11px;
+
+    background: #f5f9f9;
+
+    padding: 15px;
+
+    border-bottom: 1px solid #e5eded;
+
+}
+
+.chat-header h2 {
+
+    font-size: 14px;
+
+    margin: 0 0 5px;
+
+}
+
+.chat-header p {
+
+    font-size: 11px;
+
+    color: var(--muted);
+
+    margin: 0;
+
+}
+
+.chat-body {
+
+    min-height: 180px;
+
+    max-height: 300px;
+
+    overflow-y: auto;
+
+    padding: 15px 12px;
+
+}
+
+.message {
+
+    width: fit-content;
+
+    max-width: 85%;
+
+    padding: 10px 12px;
+
+    border-radius: 12px;
+
+    margin-bottom: 10px;
+
+    font-size: 12px;
+
+    line-height: 1.5;
+
+    overflow-wrap: anywhere;
+
+}
+
+.received {
+
+    background: #edf3f4;
+
+    color: var(--text);
+
+    border-bottom-left-radius: 3px;
+
+}
+
+.sent {
+
+    background: var(--teal);
+
+    color: white;
+
+    margin-left: auto;
+
+    border-bottom-right-radius: 3px;
+
+}
+
+.message-time {
+
+    display: block;
+
+    margin-top: 5px;
+
+    font-size: 9px;
+
+    opacity: .75;
+
+}
+
+.no-messages {
+
+    color: var(--muted);
+
+    text-align: center;
+
+    font-size: 12px;
+
+    padding: 28px 8px;
+
+}
+
+.chat-form {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+    padding: 12px;
+
+    border-top: 1px solid #e7edef;
+
+}
+
+.chat-form input {
+
+    flex: 1;
+
+    min-width: 0;
+
+    padding: 11px;
+
+    border: 1px solid #d5e0e3;
+
+    border-radius: 8px;
+
+    font-size: 12px;
+
+}
+
+.send-btn {
+
+    border: 0;
+
+    background: var(--teal);
+
+    color: white;
+
+    padding: 12px 14px;
+
+    border-radius: 8px;
+
+    font-weight: bold;
+
+    font-size: 12px;
+
+    cursor: pointer;
+
+}
+
+.send-btn:hover {
+
+    background: var(--dark);
+
+}
+
+.bottom-nav {
+
+    position: absolute;
+
+    bottom: 0;
+
+    left: 0;
+
+    width: 100%;
+
+    min-height: 64px;
+
+    display: grid;
+
+    grid-template-columns: repeat(4, 1fr);
+
+    background: white;
+
+    border-top: 1px solid #e7edef;
+
+}
+
+.bottom-nav a {
+
+    color: #839398;
+
+    text-decoration: none;
+
+    font-size: 10px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 5px;
+
+}
+
+.bottom-nav a.active {
+
+    color: var(--teal);
+
+    font-weight: bold;
+
+}
+
+.bottom-nav svg {
+
+    width: 19px;
+
+    height: 19px;
+
+}
+
+@media (min-width: 600px) {
+
+    .app {
+
+        margin: 20px auto;
+
+        min-height: calc(100vh - 40px);
+
+        border-radius: 16px;
+
+        box-shadow: 0 4px 18px #0000000c;
+
+    }
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="app">
+
+<header>
+
+    <div class="brand">STUDENT ATTENDANCE SYSTEM</div>
+
+    <h1>Student Messages</h1>
+
+</header>
+
+<main>
+
+    <h2 class="page-title">Messages</h2>
+
+    <section class="inbox">
+
+        <h2>Inbox</h2>
+
+        <input
+
+            type="search"
+
+            class="search"
+
+            id="searchInput"
+
+            placeholder="Search conversations..."
+
+            aria-label="Search conversations"
+
+        >
+
+        <div id="conversationList">
+
+            <button type="button" class="conversation active"
+
+                    data-id="admin1">
+
+                <span class="avatar">SA</span>
+
+                <span class="conversation-info">
+
+                    <strong>School Admin</strong>
+
+                    <small>Please confirm your class details.</small>
+
+                </span>
+
+                <span class="chevron">›</span>
+
+            </button>
+
+            <button type="button" class="conversation"
+
+                    data-id="teacher">
+
+                <span class="avatar">CT</span>
+
+                <span class="conversation-info">
+
+                    <strong>Class Teacher</strong>
+
+                    <small>Attendance report is available.</small>
+
+                </span>
+
+                <span class="chevron">›</span>
+
+            </button>
+
+            <button type="button" class="conversation"
+
+                    data-id="admin2">
+
+                <span class="avatar">SA</span>
+
+                <span class="conversation-info">
+
+                    <strong>School Admin</strong>
+
+                    <small>Your message will appear here.</small>
+
+                </span>
+
+                <span class="chevron">›</span>
+
+            </button>
+
+        </div>
+
+        <p id="emptySearch" class="empty-search" hidden>
+
+            No conversations found.
+
+        </p>
+
+    </section>
+
+    <section class="chat" aria-label="Chat conversation">
+
+        <div class="chat-header">
+
+            <span class="avatar" id="chatAvatar">SA</span>
+
+            <div>
+
+                <h2 id="chatTitle">School Admin</h2>
+
+                <p>Conversation</p>
+
+            </div>
+
+        </div>
+
+        <div class="chat-body" id="chatBody" aria-live="polite"></div>
+
+        <form class="chat-form" id="messageForm">
+
+            <input
+
+                type="text"
+
+                id="messageInput"
+
+                placeholder="Type your message..."
+
+                aria-label="Type your message"
+
+                maxlength="1000"
+
+                required
+
+            >
+
+            <button class="send-btn" type="submit">Send</button>
+
+        </form>
+
+    </section>
+
+</main>
+
+<nav class="bottom-nav" aria-label="Main navigation">
+
+    <a href="index.html">
+
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+
+             stroke-width="1.8">
+
+            <path d="m3 10 9-7 9 7v10h-6v-6H9v6H3z"/>
+
+        </svg>
+
+        Home
+
+    </a>
+
+    <a href="attendance.html">
+
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+
+             stroke-width="1.8">
+
+            <rect x="4" y="3" width="16" height="18" rx="2"/>
+
+            <path d="M8 8h8M8 12h8M8 16h5"/>
+
+        </svg>
+
+        Attendance
+
+    </a>
+
+    <a href="messages.html" class="active" aria-current="page">
+
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+
+             stroke-width="1.8">
+
+            <path d="M4 5h16v12H9l-5 4z"/>
+
+            <path d="M8 9h8M8 13h5"/>
+
+        </svg>
+
+        Messages
+
+    </a>
+
+    <a href="profile.html">
+
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+
+             stroke-width="1.8">
+
+            <circle cx="12" cy="8" r="4"/>
+
+            <path d="M4 21a8 8 0 0 1 16 0"/>
+
+        </svg>
+
+        Profile
+
+    </a>
+
+</nav>
+
+</div>
+
+<script>
+
+const conversationData = {
+
+    admin1: {
+
+        name: "School Admin",
+
+        initials: "SA",
+
+        preview: "Please confirm your class details.",
+
+        messages: [
+
+            {
+
+                from: "received",
+
+                text: "Please confirm your class details.",
+
+                time: "Earlier"
+
+            }
+
+        ]
+
+    },
+
+    teacher: {
+
+        name: "Class Teacher",
+
+        initials: "CT",
+
+        preview: "Attendance report is available.",
+
+        messages: [
+
+            {
+
+                from: "received",
+
+                text: "Your attendance report is available.",
+
+                time: "Earlier"
+
+            }
+
+        ]
+
+    },
+
+    admin2: {
+
+        name: "School Admin",
+
+        initials: "SA",
+
+        preview: "Your message will appear here.",
+
+        messages: []
+
+    }
+
+};
+
+let activeId = "admin1";
+
+const conversationButtons =
+
+    document.querySelectorAll(".conversation");
+
+const chatTitle = document.getElementById("chatTitle");
+
+const chatAvatar = document.getElementById("chatAvatar");
+
+const chatBody = document.getElementById("chatBody");
+
+const messageForm = document.getElementById("messageForm");
+
+const messageInput = document.getElementById("messageInput");
+
+const searchInput = document.getElementById("searchInput");
+
+const emptySearch = document.getElementById("emptySearch");
+
+function renderMessages() {
+
+    const conversation = conversationData[activeId];
+
+    chatBody.replaceChildren();
+
+    if (conversation.messages.length === 0) {
+
+        const empty = document.createElement("p");
+
+        empty.className = "no-messages";
+
+        empty.textContent = "Your message will appear here.";
+
+        chatBody.appendChild(empty);
+
+        return;
+
+    }
+
+    conversation.messages.forEach(item => {
+
+        const bubble = document.createElement("div");
+
+        bubble.className = "message " + item.from;
+
+        bubble.appendChild(document.createTextNode(item.text));
+
+        const time = document.createElement("span");
+
+        time.className = "message-time";
+
+        time.textContent = item.time;
+
+        bubble.appendChild(time);
+
+        chatBody.appendChild(bubble);
+
+    });
+
+    chatBody.scrollTop = chatBody.scrollHeight;
+
+}
+
+function selectConversation(id) {
+
+    activeId = id;
+
+    const conversation = conversationData[id];
+
+    chatTitle.textContent = conversation.name;
+
+    chatAvatar.textContent = conversation.initials;
+
+    conversationButtons.forEach(button => {
+
+        button.classList.toggle("active", button.dataset.id === id);
+
+        button.setAttribute(
+
+            "aria-pressed",
+
+            String(button.dataset.id === id)
+
+        );
+
+    });
+
+    renderMessages();
+
+}
+
+conversationButtons.forEach(button => {
+
+    button.addEventListener("click", () => {
+
+        selectConversation(button.dataset.id);
+
+    });
+
+});
+
+messageForm.addEventListener("submit", event => {
+
+    event.preventDefault();
+
+    const text = messageInput.value.trim();
+
+    if (!text) return;
+
+    const conversation = conversationData[activeId];
+
+    conversation.messages.push({
+
+        from: "sent",
+
+        text: text,
+
+        time: new Date().toLocaleTimeString([], {
+
+            hour: "2-digit",
+
+            minute: "2-digit"
+
+        })
+
+    });
+
+    conversation.preview = text;
+
+    const activeButton = document.querySelector(
+
+        '.conversation[data-id="' + activeId + '"]'
+
+    );
+
+    activeButton.querySelector("small").textContent = text;
+
+    renderMessages();
+
+    messageInput.value = "";
+
+    messageInput.focus();
+
+});
+
+searchInput.addEventListener("input", () => {
+
+    const query = searchInput.value.trim().toLowerCase();
+
+    let visibleCount = 0;
+
+    conversationButtons.forEach(button => {
+
+        const matches = button.textContent.toLowerCase().includes(query);
+
+        button.hidden = !matches;
+
+        if (matches) visibleCount++;
+
+    });
+
+    emptySearch.hidden = visibleCount !== 0;
+
+});
+
+selectConversation("admin1");
+
+</script>
+
+</body>
+
+</html>

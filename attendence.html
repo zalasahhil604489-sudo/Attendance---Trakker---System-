@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Student Attendance</title>
+
+<style>
+
+* {
+
+    box-sizing: border-box;
+
+}
+
+body {
+
+    margin: 0;
+
+    padding: 20px;
+
+    font-family: Arial, sans-serif;
+
+    background: #eaf0f2;
+
+    color: #145c56;
+
+}
+
+.phone {
+
+    max-width: 390px;
+
+    min-height: 650px;
+
+    margin: auto;
+
+    background: #f7f9fa;
+
+    border-radius: 20px;
+
+    overflow: hidden;
+
+}
+
+header {
+
+    background: #0d625b;
+
+    color: white;
+
+    padding: 20px;
+
+}
+
+header small {
+
+    font-size: 10px;
+
+}
+
+header h1 {
+
+    font-size: 21px;
+
+    margin-bottom: 0;
+
+}
+
+main {
+
+    padding: 20px;
+
+}
+
+.card {
+
+    background: white;
+
+    padding: 16px;
+
+    border-radius: 12px;
+
+    margin: 15px 0;
+
+}
+
+.date {
+
+    background: #e2f3f0;
+
+    padding: 15px;
+
+    border-radius: 10px;
+
+}
+
+p {
+
+    font-size: 13px;
+
+    line-height: 1.6;
+
+}
+
+.btn {
+
+    width: 100%;
+
+    padding: 14px;
+
+    margin-top: 12px;
+
+    background: #0d625b;
+
+    color: white;
+
+    border: none;
+
+    border-radius: 8px;
+
+    cursor: pointer;
+
+    font-weight: bold;
+
+}
+
+.btn:hover {
+
+    background: #084e49;
+
+}
+
+.status {
+
+    font-weight: bold;
+
+    color: #0d8b67;
+
+}
+
+nav {
+
+    display: flex;
+
+    justify-content: space-around;
+
+    padding: 15px 5px;
+
+    background: white;
+
+    margin-top: 35px;
+
+}
+
+nav a {
+
+    color: #145c56;
+
+    font-size: 11px;
+
+    text-decoration: none;
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="phone">
+
+<header>
+
+    <small>STUDENT ATTENDANCE SYSTEM</small>
+
+    <h1>Student Mark Attendance</h1>
+
+</header>
+
+<main>
+
+    <h3>Mark your attendance</h3>
+
+    <p>Check today's date and mark yourself present.</p>
+
+    <div class="date">
+
+        <strong>Today's Date</strong>
+
+        <p id="today"></p>
+
+    </div>
+
+    <div class="card">
+
+        <strong>Current Time</strong>
+
+        <p id="clock"></p>
+
+    </div>
+
+    <div class="card">
+
+        <strong>Attendance Status</strong>
+
+        <p id="status">Not marked yet</p>
+
+    </div>
+
+    <button class="btn" onclick="markPresent()">
+
+        MARK PRESENT
+
+    </button>
+
+    <button class="btn" onclick="goHome()">
+
+        BACK TO HOME
+
+    </button>
+
+    <nav>
+
+        <a href="index.html">Home</a>
+
+        <a href="attendance.html">Attendance</a>
+
+        <a href="index.html">Messages</a>
+
+        <a href="index.html">Profile</a>
+
+    </nav>
+
+</main>
+
+</div>
+
+<script>
+
+function updateTime() {
+
+    const now = new Date();
+
+    document.getElementById("today").textContent =
+
+        now.toLocaleDateString("en-US", {
+
+            weekday: "long",
+
+            year: "numeric",
+
+            month: "long",
+
+            day: "numeric"
+
+        });
+
+    document.getElementById("clock").textContent =
+
+        now.toLocaleTimeString();
+
+}
+
+function markPresent() {
+
+    document.getElementById("status").textContent =
+
+        "Present — " + new Date().toLocaleTimeString();
+
+    document.getElementById("status").className = "status";
+
+}
+
+function goHome() {
+
+    window.location.href = "index.html";
+
+}
+
+updateTime();
+
+setInterval(updateTime, 1000);
+
+</script>
+
+</body>
+
+</html>
